@@ -25,13 +25,16 @@
 
 
   <!--<script src="script.js"></script>-->
-  <script>
+ <script>
     var calcSimple = function() {
       var price = parseFloat($("#totalPrice").val());
       var duration = parseFloat($("#duration").val());
-      var cost = parseFloat($("#costOfAqusition").val());
-      $("#valMachineSimple").html(((price * duration) - cost));
+      var cost = parseFloat($("#costOfAqusition").val()) * 12;
+      
+      $("#valMachineSimpleYearly").html('$'+ ((price * duration) - cost) +' per annum');
+      $("#valMachineSimpleMonthly").html('$'+ (((price * duration) - cost)/12) +' per month');
     };
+
     var calculateClv = function(a, b, c, d, e, f) {
       c = c ? c : 30, d = d ? d : 1, e = e ? e : 0, f = f ? f : 0;
       var g = -1 * f,
@@ -44,7 +47,9 @@
       for (i = 0; l > i; i++) i % c == 0 && (j = a * d, j *= Math.pow(b, n), j *= Math.pow(k, h), g += j, m.push(g), h += c, n++);
       return m
     }
+
     var calc = function() {
+
       var averageOrderValue = parseFloat($("#averageOrderValue").val());
       var repeatPurchaseRate = parseFloat($("#repeatPurchaseRate").val()) / 100;
       var timeBetweenPurchases = parseInt($("#timeBetweenPurchases").val());
@@ -69,10 +74,12 @@
       $('#valMachine').html(computed_clv);
       //alert(computed_clv.formatMoney(2))
     };
+
     $(document).ready(function() {
       $('#btnCalculate').click(function() {
         calc();
       });
+
       $('#btnCalculateSimple').click(function() {
         calcSimple();
       });
@@ -98,7 +105,7 @@
       <input type="text" id="timeBetweenPurchases" placeholder="time Between Purchases" />
       </span>
        <br><br>
-      <span>
+      <!--span>
       
       <input type="text" id="grossMargin" placeholder="gross Margin" />
       </span>
@@ -106,8 +113,9 @@
       <span>
     
       <input type="text" id="costOfCapital" placeholder="cost Of Capital" />
-      </span>
       <br><br>
+      </span-->
+      
       <span>
       <input type="text" id="customerAcquisitionCost" placeholder="customer Acquisition Cost" />
       </span>
@@ -130,13 +138,13 @@
 
       <div class="input-grp">
         <span>
-        <input type="text" id="totalPrice" placeholder="total price" />
+        <input type="text" id="totalPrice" placeholder="total price(yearly)" />
         </span>
         <span>
-        <input type="text" id="duration" placeholder="duration" />
+        <input type="text" id="duration" placeholder="duration(in years)" />
         </span>
         <span>
-        <input type="text" id="costOfAqusition" placeholder="cost of aqusition" />
+        <input type="text" id="costOfAqusition" placeholder="cost of aqusition(p.m.)" />
         </span>
         <br><br>
         <span class="button-group">
@@ -145,8 +153,9 @@
       </div>
       <br>
       <div class="well">
-        Profits Actually Made is ::
-        <div id="valMachineSimple"></div>
+        Profits Actually Made is  ::
+        <div id="valMachineSimpleMonthly"></div>
+        <div id="valMachineSimpleYearly"></div>
       </div>
     </div>
   </div>
