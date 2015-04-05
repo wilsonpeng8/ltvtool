@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
 
   </head>
@@ -34,7 +35,6 @@
       var cost = parseFloat($("#costOfAqusition").val());
       $("#valMachineSimple").html(((price * duration) - cost));
     };
-
     var calculateClv = function(a, b, c, d, e, f) {
       c = c ? c : 30, d = d ? d : 1, e = e ? e : 0, f = f ? f : 0;
       var g = -1 * f,
@@ -47,9 +47,7 @@
       for (i = 0; l > i; i++) i % c == 0 && (j = a * d, j *= Math.pow(b, n), j *= Math.pow(k, h), g += j, m.push(g), h += c, n++);
       return m
     }
-
     var calc = function() {
-
       var averageOrderValue = parseFloat($("#averageOrderValue").val());
       var repeatPurchaseRate = parseFloat($("#repeatPurchaseRate").val()) / 100;
       var timeBetweenPurchases = parseInt($("#timeBetweenPurchases").val());
@@ -74,12 +72,10 @@
       $('#valMachine').html(computed_clv);
       //alert(computed_clv.formatMoney(2))
     };
-
     $(document).ready(function() {
       $('#btnCalculate').click(function() {
         calc();
       });
-
       $('#btnCalculateSimple').click(function() {
         calcSimple();
       });
@@ -173,4 +169,3 @@
   
   
 </html>
-
