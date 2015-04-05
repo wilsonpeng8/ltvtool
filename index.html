@@ -21,7 +21,21 @@
 
   <!--<script src="script.js"></script>-->
 
+ <script data-require="jquery@2.1.3" data-semver="2.1.3" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link data-require="bootstrap@3.3.2" data-semver="3.3.2" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+  <script data-require="bootstrap@3.3.2" data-semver="3.3.2" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+  <!--<script src="script.js"></script>-->
   <script>
+    var calcSimple = function() {
+      var price = parseFloat($("#totalPrice").val());
+      var duration = parseFloat($("#duration").val());
+      var cost = parseFloat($("#costOfAqusition").val());
+      $("#valMachineSimple").html(((price * duration) - cost));
+    };
+
     var calculateClv = function(a, b, c, d, e, f) {
       c = c ? c : 30, d = d ? d : 1, e = e ? e : 0, f = f ? f : 0;
       var g = -1 * f,
@@ -65,39 +79,85 @@
     $(document).ready(function() {
       $('#btnCalculate').click(function() {
         calc();
-        //alert('calculate');
-        /** var averageOrderValue = parseFloat($("#avgOrderValue").val());
-            var repeatPurchaseRate = parseFloat($("#repurchaseRate").val()) / 100;
-            var timeBetweenPurchases = parseInt($("#timeBetweenPurchases").val());
-            var grossMargin = parseFloat($("#grossMargin").val()) / 100;
-            var costOfCapital = parseFloat($("#costOfCapital").val()) / 100;
-            var customerAcquisitionCost = parseFloat($("#customerAcquisitionCost").val());
-            //var clvSeries = calculateClv(averageOrderValue, repeatPurchaseRate, timeBetweenPurchases, grossMargin, costOfCapital, customerAcquisitionCost);*/
-        //alert(clvSeries);
-        
-        
+      });
 
+      $('#btnCalculateSimple').click(function() {
+        calcSimple();
       });
     });
   </script>
 </head>
 
-
 <body>
-  Cost of Product
-  <input type="text" id="averageOrderValue" placeholder="averageOrderValue">
-  <br>Repeat Purchase Rate (Percentage of How Often A User Renews i.e. 100% = every month)
-  <input type="text" id="repeatPurchaseRate" placeholder="repeatPurchaseRate">
-  <br>How Many Times Per Year
-  <input type="text" id="timeBetweenPurchases" placeholder="timeBetweenPurchases">
-  <br>Customer Acquisition Cost
-  <input type="text" id="customerAcquisitionCost" placeholder="customerAcquisitionCost">
+  <div id="complex">
+    <div class="well">Calculator for Customer Lifetime Value</div>
+    <div class="input-grp">
+       <span>
+      <input type="text" id="averageOrderValue" placeholder="average Order Value" />
+      </span>
+      <br><br>
+      <span>
+
+      <input type="text" id="repeatPurchaseRate" placeholder="repeat Purchase Rate" />
+      </span>
+      <br><br>
+      <span>
+
+      <input type="text" id="timeBetweenPurchases" placeholder="time Between Purchases" />
+      </span>
+       <br><br>
+      <span>
+      
+      <input type="text" id="grossMargin" placeholder="gross Margin" />
+      </span>
+      <br><br>
+      <span>
+    
+      <input type="text" id="costOfCapital" placeholder="cost Of Capital" />
+      </span>
+      <br><br>
+      <span>
+      <input type="text" id="customerAcquisitionCost" placeholder="customer Acquisition Cost" />
+      </span>
+    </div>
+    <br>
+    <input type="button" class="btn-primary" id="btnCalculate" value="calculate" />
+    <br><br>
+    <div class="well">Lifetime value of customer is ::
+      <p id="valMachine"></p>
+    </div>
+  </div>
   <br>
+  <div id="simple">
+
+    <div id="complex">
+      <div class="well">
+        <p>the lifetime value of a gym member who spends $20 every month for 3 years. The value of that customer would be: $20 X 12 months X 3 years = $720 in total revenue (or $240 per year)</p>
+      </div>
 
 
-  <input type="button" id="btnCalculate" value="calculate">
-  
-  <div id="valMachine"></div>
+      <div class="input-grp">
+        <span>
+        <input type="text" id="totalPrice" placeholder="total price" />
+        </span>
+        <span>
+        <input type="text" id="duration" placeholder="duration" />
+        </span>
+        <span>
+        <input type="text" id="costOfAqusition" placeholder="cost of aqusition" />
+        </span>
+        <br><br>
+        <span class="button-group">
+        <input type="button" class="btn-primary" id="btnCalculateSimple" value="calculate" />
+        </span>
+      </div>
+      <br>
+      <div class="well">
+        Profits Actually Made is ::
+        <div id="valMachineSimple"></div>
+      </div>
+    </div>
+  </div>
 </body>
 
 
